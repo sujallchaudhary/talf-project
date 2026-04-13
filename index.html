@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CFG Derivation &amp; Parse Tree Generator</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <h1>CFG Derivation &amp; Parse Tree Generator</h1>
+            <p class="header-sub">Sujal Chaudhary &mdash; 2024UCA1953</p>
+        </header>
+
+        <section class="input-card">
+            <div class="input-row">
+                <div class="input-group grow-2">
+                    <label for="grammar">Grammar Rules</label>
+                    <div class="symbol-buttons">
+                        <button type="button" class="btn-sym" data-symbol="->" title="Arrow">-&gt;</button>
+                        <button type="button" class="btn-sym" data-symbol="|" title="OR">|</button>
+                        <button type="button" class="btn-sym" data-symbol="ε" title="Epsilon">&epsilon;</button>
+                    </div>
+                    <textarea id="grammar" rows="6" spellcheck="false" placeholder="S -> aSb | ab">S -> aSb | ab</textarea>
+                    <small>One rule per line &middot; Non-terminals: A-Z &middot; Use &epsilon; for epsilon</small>
+                </div>
+                <div class="input-group grow-1">
+                    <label for="target">Input String</label>
+                    <input type="text" id="target" value="aabb" spellcheck="false" placeholder="e.g. aabb">
+                    <small>String to derive from the start symbol</small>
+
+                    <label class="label-mt">Quick Examples</label>
+                    <div class="example-grid">
+                        <button class="btn-ex" data-example="1">a<sup>n</sup>b<sup>n</sup></button>
+                        <button class="btn-ex" data-example="2">Multi-rule</button>
+                        <button class="btn-ex" data-example="3">Palindrome</button>
+                        <button class="btn-ex" data-example="4">Arithmetic</button>
+                    </div>
+                </div>
+            </div>
+            <button id="generate" class="btn-generate">Generate</button>
+        </section>
+
+        <div id="error" class="error hidden"></div>
+
+        <div id="placeholder" class="placeholder">
+            <div class="placeholder-icon">{ }</div>
+            <p>Enter a grammar and string, then click <strong>Generate</strong></p>
+        </div>
+
+        <div id="output" class="output hidden">
+            <!-- Parsed grammar table -->
+            <div class="result-section">
+                <h2>Parsed Grammar</h2>
+                <table id="grammar-table" class="grammar-table">
+                    <thead><tr><th>Non-Terminal</th><th>Productions</th></tr></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <!-- Side-by-side stepper derivations -->
+            <div class="result-section">
+                <h2>Step-by-Step Derivation</h2>
+                <div class="stepper-controls">
+                    <button id="step-prev" class="btn-step" disabled>&larr; Prev</button>
+                    <span id="step-info" class="step-info">Step 1 / 1</span>
+                    <button id="step-next" class="btn-step">Next &rarr;</button>
+                    <button id="step-all" class="btn-step btn-step-alt">Show All</button>
+                </div>
+                <div class="derivation-pair">
+                    <div class="deriv-col">
+                        <h3>Leftmost</h3>
+                        <div id="left-stepper" class="stepper-display"></div>
+                    </div>
+                    <div class="deriv-col">
+                        <h3>Rightmost</h3>
+                        <div id="right-stepper" class="stepper-display"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full derivation chains -->
+            <div id="full-derivations" class="result-section hidden">
+                <div class="derivation-pair">
+                    <div class="deriv-col">
+                        <h3>Leftmost (all steps)</h3>
+                        <div id="leftmost"></div>
+                    </div>
+                    <div class="deriv-col">
+                        <h3>Rightmost (all steps)</h3>
+                        <div id="rightmost"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Parse tree -->
+            <div class="result-section">
+                <h2>Parse Tree</h2>
+                <div class="tree-wrapper">
+                    <canvas id="parse-tree"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/grammar.js"></script>
+    <script src="js/derivation.js"></script>
+    <script src="js/tree.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
