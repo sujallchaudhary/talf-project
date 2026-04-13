@@ -73,7 +73,7 @@ class TreeRenderer {
             this.ctx.beginPath();
             this.ctx.moveTo(x1, y1 + this.nodeRadius);
             this.ctx.lineTo(x2, y2 - this.nodeRadius);
-            this.ctx.strokeStyle = '#45475a';
+            this.ctx.strokeStyle = '#9ca0b0';
             this.ctx.lineWidth = 1.5;
             this.ctx.stroke();
 
@@ -88,20 +88,20 @@ class TreeRenderer {
         const size = r * 2;
 
         if (node.symbol === 'ε') {
-            this.ctx.fillStyle = '#313244';
-            this.ctx.strokeStyle = '#585b70';
+            this.ctx.fillStyle = '#e6e9ef';
+            this.ctx.strokeStyle = '#9ca0b0';
         } else if (node.isTerminal) {
-            this.ctx.fillStyle = '#1e3a2a';
-            this.ctx.strokeStyle = '#a6e3a1';
+            this.ctx.fillStyle = '#d5f0cf';
+            this.ctx.strokeStyle = '#40a02b';
         } else {
-            this.ctx.fillStyle = '#1e2a40';
-            this.ctx.strokeStyle = '#89b4fa';
+            this.ctx.fillStyle = '#dce5fc';
+            this.ctx.strokeStyle = '#1e66f5';
         }
 
         this.ctx.fillRect(x - r, y - r, size, size);
         this.ctx.lineWidth = 2;
         this.ctx.strokeRect(x - r, y - r, size, size);
-        this.ctx.fillStyle = '#cdd6f4';
+        this.ctx.fillStyle = '#1e1e2e';
         this.ctx.font = `bold ${this.fontSize}px 'JetBrains Mono', Consolas, 'Courier New', monospace`;
         this.ctx.textAlign = 'center';
         this.ctx.textBaseline = 'middle';
